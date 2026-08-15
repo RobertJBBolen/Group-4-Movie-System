@@ -2,10 +2,10 @@
 
 # Features
 
-# CREATE / (Add & Manage movies)
+# CREATE / (Add Movies (Genre, Title))
 
-# READ / (Search movies(Genre -> Movie), Show Reviews)
+# READ / (Search movies(Genre -> Movie), Show Reviews and comments etc.)
 
-# UPDATE / (Updating Movie titles etc.)
+# UPDATE / (Updating Movie titles & managing movies.)
 
 # DELETE / (Delete movies)
