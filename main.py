@@ -1,20 +1,39 @@
-# Features
+genres = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Fantasy", "Romance", "Thriller"]
 
-# Search 
+def banner():
+    width = 60
 
-# Add/Manage Movies
+    print("="*width+"\n")
+    print(" "+"🎬 WELCOME 🎬".center(width)+" \n")
+    print(" "+"S C R E E N S P A C E".center(width)+" \n")
+    print(" "+"YOUR WORLD OF MOVIES STARTS HERE".center(width)+" \n")
+    print("="*width+"\n")
 
-# Review/Comments
+    print("  Welcome to ScreenSpace! \n")
+    print("  Explore movies, discover recommendations, search for \n    your favorite films, and learn more about the stories \n    and characters behind them. \n")
+    print("  Share your thoughts through reviews and discover something \n    new every time you visit. \n")
 
-# 
+    print("="*width+"\n")
+    print(" "+"[1] Register".center(width)+" ")
+    print(" "+"[2] Exit".center(width)+" ")
+    print("="*width+"\n")
 
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        register()
+    elif choice == 2:
+        False
+    else:
+        print("Invalid Input")
+        return
 
-def display():
-    print("Welcome to CineCore, your ultimate command-line hub for exploring, reviewing, and tracking your favorite films!")
-    userinfo()
+def register():
+    print("="*20 + " REGISTER " + "="*20)
     
-def userinfo():
-    username = input("Enter username for your account:")
-    favorite_Genre = input("What your Favorite Genre:")
+    name = input("Enter your name: ")
+    age = input("Enter your age: ")
 
-display()
+    print(genres)
+    favGenre = input("Enter your Favorite Genre: ")
+
+banner()
