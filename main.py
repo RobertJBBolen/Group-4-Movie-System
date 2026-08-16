@@ -18,25 +18,25 @@ def banner():
     print(" "+"[2] Exit".center(width)+" ")
     print("="*width+"\n")
 
-    choice = int(input("Enter your choice: "))
-    if choice == 1:
-        register()
-    elif choice == 2:
-        False
-    else:
-        print("Invalid Input")
-        return
-
 def register():
-    print("="*20 + " REGISTER " + "="*20)
-    
+    print("\n"+"="*20 + " REGISTER " + "="*20+"\n")
+
     name = input("Enter your name: ")
     age = input("Enter your age: ")
 
+    print()
     print(genres)
-    favGenre = input("Enter your Favorite Genre: ")
+    favGenre = input("\nEnter your Favorite Genre: ")
 
-def menu():
+    print("\nRegistered Complete!\n")
+
+    return{
+        "name": name,
+        "age": age,
+        "favGenre": favGenre
+    }
+
+def menu(user):
     while True:
         print()
         print("="*width)
@@ -69,6 +69,36 @@ def menu():
             print("\nThank you for using screenspace")
             break
         else:
-            print("\nInvalid choice")
+            print("\nInvalid choice\n")
+
+def profile(user):
+    print("="*width)
+    print(""+"Profile".center(width)+"")
+    print("="*width)
+    print(f"\nName             : {user['name']}")
+    print(f"Age              : {user['age']}")
+    print(f"Favorite Genre   : {user['favGenre']}")
+    print()
+    print("="*width)
+
+    input("Press Enter to return to main menu...")
     
-menu()
+def main():
+    while True:
+        banner()
+
+        choice = int(input("Enter your choice: "))
+
+        if choice == 1:
+            user = register()
+            input("Press ENTER to continue")
+            menu(user)
+        elif choice == 2:
+            print("\nThank you for using screenspace")
+            break
+        else:
+            print("\nInvalid Input\n")
+            
+main()
+
+    
