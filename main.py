@@ -10,6 +10,12 @@
 
 # DELETE / (Delete movies)
 
+movie_genres = {
+    "Action": ["Spiderman Brand new day"],
+    "Musical": ["Mamma Mia"],
+    "Comedy": ["Mean Girls"],
+    "Sci-Fi": ["Star wars"]
+
 def search():
     print("\nSEARCH MOVIES\n")
 
@@ -17,7 +23,7 @@ def search():
 
     found = False
 
-    for movie in movies:
+    for movie in movie_genres:
         if keyword in movie["title"].lower() or keyword in movie["genre"].lower():
             print(f"\nTitle: {movie['title']}")
             print(f"Genre: {movie['genre']}")
