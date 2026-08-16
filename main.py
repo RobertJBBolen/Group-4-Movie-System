@@ -27,3 +27,5 @@ def search():
         print("\nNo movies found.")
 
     input("\nPress Enter to return to main menu...")
+
+search()
