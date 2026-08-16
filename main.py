@@ -67,7 +67,7 @@ def menu(user):
             profile(user)
         elif choice == 7:
             print("\nThank you for using screenspace")
-            break
+            return False
         else:
             print("\nInvalid choice\n")
 
@@ -92,7 +92,10 @@ def main():
         if choice == 1:
             user = register()
             input("Press ENTER to continue")
-            menu(user)
+            running = menu(user)
+
+            if running == False:
+                break
         elif choice == 2:
             print("\nThank you for using screenspace")
             break
