@@ -36,3 +36,41 @@ def search():
     input("\nPress Enter to return to main menu...")
 
 search()
+
+def view_and_review():
+    print("\n--- VIEW & REVIEW MOVIES ---")
+    
+    # Create a simple numbered list using a normal counter
+    count = 1
+    movie_list = []
+    
+    for genre in movie_genres:
+        for movie in movie_genres[genre]:
+            print(f"{count}. {movie}")
+            movie_list.append(movie)
+            count += 1
+            
+    # Get user choice by number
+    choice = int(input("\nEnter movie number: ")) - 1
+    
+    if choice >= 0 and choice < len(movie_list):
+        selected_movie = movie_list[choice]
+        print(f"\n--- Details for: {selected_movie} ---")
+        
+        # Show reviews if any exist
+        if selected_movie in reviews:
+            print("Reviews:", reviews[selected_movie])
+        else:
+            print("No reviews yet.")
+            
+        # Add a review option
+        new_review = input("Write a review (press Enter to skip): ")
+        if new_review != "":
+            if selected_movie not in reviews:
+                reviews[selected_movie] = []
+            reviews[selected_movie].append(new_review)
+            print("Review saved!")
+    else:
+        print("Invalid number choice.")
+        
+    input("\nPress Enter to return...")
