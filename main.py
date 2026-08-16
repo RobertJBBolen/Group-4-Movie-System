@@ -15,6 +15,7 @@ movie_genres = {
     "Musical": ["Mamma Mia"],
     "Comedy": ["Mean Girls"],
     "Sci-Fi": ["Star wars"]
+}
 
 def search():
     print("\nSEARCH MOVIES\n")
