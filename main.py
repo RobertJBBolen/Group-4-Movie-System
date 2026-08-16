@@ -21,14 +21,14 @@ def search():
     print("\nSEARCH MOVIES\n")
 
     keyword = input("Enter movie title or genre: ").strip().lower()
-
     found = False
 
-    for movie in movie_genres:
-        if keyword in movie["title"].lower() or keyword in movie["genre"].lower():
-            print(f"\nTitle: {movie['title']}")
-            print(f"Genre: {movie['genre']}")
-            found = True
+    for genre, titles in movie_genres.items():
+        for title in titles:
+            if keyword in title.lower() or keyword in genre.lower():
+                print(f"\nTitle: {title}")
+                print(f"Genre: {genre}")
+                found = True
 
     if not found:
         print("\nNo movies found.")
