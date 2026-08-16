@@ -40,7 +40,7 @@ search()
 def view_and_review():
     print("\n--- VIEW & REVIEW MOVIES ---")
     
-    # Create a simple numbered list using a normal counter
+    
     count = 1
     movie_list = []
     
@@ -50,7 +50,7 @@ def view_and_review():
             movie_list.append(movie)
             count += 1
             
-    # Get user choice by number
+    
     choice = int(input("\nEnter movie number: ")) - 1
     
     if choice >= 0 and choice < len(movie_list):
