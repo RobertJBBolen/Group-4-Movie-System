@@ -21,6 +21,7 @@ def delete_movies(genre, title):
     if genre in movie_genres:
         if title in movie_genres[genre]:
             movie_genres[genre].remove(title)
+                 
 
 update_movies("Action", "Spiderman Brand new day", "Spiderman")
 update_movies("Musical", "Mamma Mia", "The Greatest Showman")
