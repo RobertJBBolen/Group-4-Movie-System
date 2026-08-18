@@ -35,8 +35,6 @@ def search():
 
     input("\nPress Enter to return to main menu...")
 
-search()
-
 def view_and_review():
     print("\n--- VIEW & REVIEW MOVIES ---")
     
@@ -74,3 +72,7 @@ def view_and_review():
         print("Invalid number choice.")
         
     input("\nPress Enter to return...")
+
+# Call main function
+if __name__ == "__main__":
+    search()
