@@ -63,14 +63,14 @@ def menu(user):
         print("="*width)
         print(""+"MAIN MENU".center(width)+"")
         print("="*width)
-        print("\n [1] Suggested Movies\n [2] Search Movies\n [3] Add Movie\n [4] Update Movie\n [5] Delete Movie\n [6] Profile\n [7] Exit\n  ")
+        print("\n [1] Reccomendation Movies\n [2] Search Movies\n [3] Add Movie\n [4] Update Movie\n [5] Delete Movie\n [6] Profile\n [7] Exit\n  ")
         print("="*width)
 
         choice = int(input("Enter your choice: "))
             
         if choice == 1:
-            print("\nOpening suggested movie...")
-            suggestion()
+            print("\nOpening recommendation movie...")
+            recommend(user)
         elif choice == 2:
             print("\nOpening search movie...")
             search()
@@ -92,6 +92,58 @@ def menu(user):
         else:
             print("\nInvalid choice\n")
 
+def recommend(user):
+    print("=" * width)
+    print("Recommend Movies".center(width))
+    print("=" * width)
+
+    recommended_movies = []
+
+    for movie in movies:
+        if movie["genre"] in user["favGenre"]:
+            recommended_movies.append(movie)
+
+    if not recommended_movies:
+        print("\nNo movies found for your favorite genres.")
+        print("=" * width)
+        input("Press Enter to return to main menu...")
+        return
+
+    print("\nMovies recommended for you:\n")
+
+    for i, movie in enumerate(recommended_movies, 1):
+        print(f"[{i}] {movie['title']}")
+        print(f"    Genre  : {movie['genre']}")
+        print(f"    Rating : {movie['rating']}")
+        print()
+
+    while True:
+        try:
+            choice = int(input("Enter the movie number to view details: "))
+
+            if 1 <= choice <= len(recommended_movies):
+                selected_movie = recommended_movies[choice - 1]
+
+                print("\n" + "=" * width)
+                print("MOVIE DETAILS".center(width))
+                print("=" * width)
+
+                print(f"\nTitle       : {selected_movie['title']}")
+                print(f"Genre       : {selected_movie['genre']}")
+                print(f"Year        : {selected_movie['year']}")
+                print(f"Rating      : {selected_movie['rating']}")
+                print(f"Description : {selected_movie['description']}")
+
+                print("\n" + "=" * width)
+
+                input("Press Enter to return to main menu...")
+                break
+
+            else:
+                print(f"Please enter a number from 1 to {len(recommended_movies)}.")
+
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
 def profile(user):
     print("="*width)
