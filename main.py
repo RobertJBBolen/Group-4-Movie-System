@@ -22,8 +22,27 @@ def banner():
 def register():
     print("\n"+"="*20 + " REGISTER " + "="*20+"\n")
 
-    name = input("Enter your name: ")
-    age = input("Enter your age: ")
+    while True:
+        name = input("Enter your name: ")
+
+        if name == "":
+            print("\nName cannot be empty.")
+        elif any(char.isdigit() for char in name):
+            print("\nName cannot contain numbers.")
+        else:
+            break
+
+    while True:
+        try:
+            age = int(input("\nEnter your age: "))
+
+            if 1 <= age <= 120:
+                break
+            else:
+                print("\nPlease enter an age between 1 and 120.")
+
+        except ValueError:
+            print("\nInvalid input. Please enter numbers only.")
 
     print()
     print("\nGenres:")
@@ -40,6 +59,7 @@ def register():
             choices = [int(choice) for choice in choices]
 
             if all(1 <= choice <= len(genres) for choice in choices):
+                choices = list(set(choices))
                 break
             else:
                 print(f"Please enter numbers from 1 to {len(genres)}.")
@@ -49,7 +69,7 @@ def register():
 
     favGenre = [genres[choice - 1] for choice in choices]
 
-    print("\nRegistered Complete!\n")
+    print("\nRegistration Complete!\n")
 
     return{
         "name": name,
@@ -63,10 +83,14 @@ def menu(user):
         print("="*width)
         print(""+"MAIN MENU".center(width)+"")
         print("="*width)
-        print("\n [1] Reccomendation Movies\n [2] Search Movies\n [3] Add Movie\n [4] Update Movie\n [5] Delete Movie\n [6] Profile\n [7] Exit\n  ")
+        print("\n [1] Recommendation Movies\n [2] Search Movies\n [3] Add Movie\n [4] Update Movie\n [5] Delete Movie\n [6] Profile\n [7] Exit\n  ")
         print("="*width)
 
-        choice = int(input("Enter your choice: "))
+        try:
+            choice = int(input("Enter your choice: "))
+        except ValueError:
+            print("\nInvalid input. Please enter a number.")
+            continue
             
         if choice == 1:
             print("\nOpening recommendation movie...")
@@ -161,7 +185,11 @@ def main():
     while True:
         banner()
 
-        choice = int(input("Enter your choice: "))
+        try:
+            choice = int(input("Enter your choice: "))
+        except ValueError:
+            print("\nInvalid input. Please enter a number.")
+            continue
 
         if choice == 1:
             user = register()
