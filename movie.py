@@ -4,7 +4,7 @@ movies = [
         "genre": "Action",
         "year": 2021,
         "rating": 8.2,
-        "description": "Peter Parker's identity is revealed, causing him to ask Doctor Strange for help. The spell goes wrong and brings villains from different universes.",
+        "description": "Peter Parker's identity is revealed, causing him \nto ask Doctor Strange for help. The spell goes wrong and brings villains \n from different universes.",
         "reviews": [
             {
                 "user": "Kenneth",
@@ -24,7 +24,7 @@ movies = [
         "genre": "Horror",
         "year": 2013,
         "rating": 7.5,
-        "description": "A family experiences terrifying supernatural events in their new home and seeks help from paranormal investigators.",
+        "description": "A family experiences terrifying supernatural events \nin their new home and seeks help from paranormal investigators.",
         "reviews": [
             {
                 "user": "Robert",
@@ -44,7 +44,7 @@ movies = [
         "genre": "Action",
         "year": 2019,
         "rating": 8.4,
-        "description": "The Avengers attempt to reverse the destruction caused by Thanos and bring back the people who disappeared.",
+        "description": "The Avengers attempt to reverse the destruction caused \nby Thanos and bring back the people who disappeared.",
         "reviews": [
             {
                 "user": "Kenneth",
@@ -64,7 +64,7 @@ movies = [
         "genre": "Sci-Fi",
         "year": 2014,
         "rating": 8.7,
-        "description": "A group of astronauts travels through a wormhole in search of a new home for humanity as Earth becomes increasingly difficult to live on.",
+        "description": "A group of astronauts travels through a wormhole in \nsearch of a new home for humanity as Earth becomes increasingly difficult to live on.",
         "reviews": [
             {
                 "user": "Chris",
@@ -84,7 +84,7 @@ movies = [
         "genre": "Fantasy",
         "year": 2010,
         "rating": 8.1,
-        "description": "A young Viking named Hiccup becomes friends with a wounded dragon and begins to challenge the beliefs of his village.",
+        "description": "A young Viking named Hiccup becomes friends with a wounded \ndragon and begins to challenge the beliefs of his village.",
         "reviews": [
             {
                 "user": "Junelle",
@@ -104,7 +104,7 @@ movies = [
         "genre": "Romance",
         "year": 2004,
         "rating": 7.8,
-        "description": "A young couple from different social backgrounds falls in love and struggles to stay together despite the challenges they face.",
+        "description": "A young couple from different social backgrounds falls in \nlove and struggles to stay together despite the challenges they face.",
         "reviews": [
             {
                 "user": "Chris",
@@ -119,7 +119,7 @@ movies = [
         "genre": "Action",
         "year": 2008,
         "rating": 9.0,
-        "description": "Batman faces the Joker, a criminal mastermind who creates chaos throughout Gotham City and challenges Batman's principles.",
+        "description": "Batman faces the Joker, a criminal mastermind who creates \nchaos throughout Gotham City and challenges Batman's principles.",
         "reviews": [
             {
                 "user": "Robert",
@@ -139,7 +139,7 @@ movies = [
         "genre": "Comedy",
         "year": 2015,
         "rating": 8.0,
-        "description": "A young girl experiences major changes in her life while the emotions inside her mind try to help her adjust.",
+        "description": "A young girl experiences major changes in her life while the \nemotions inside her mind try to help her adjust.",
         "reviews": [
             {
                 "user": "Junelle",
