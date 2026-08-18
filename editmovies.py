@@ -12,9 +12,15 @@ def show_Movies():
 
 show_Movies()
 
-def update_movies(genre, oldTitle, newTitle):
+def update_movies():
+    genre = input("Enter genre to update: ")
+    
     if genre in movie_genres:
+        oldTitle = input("Enter old title: ")
+        
         if oldTitle in movie_genres[genre]:
+            newTitle = input("Enter new title: ")
+            
             for i, movies in enumerate(movie_genres[genre]):
                 if movies == oldTitle:
                     movie_genres[genre][i] = newTitle
@@ -24,8 +30,12 @@ def update_movies(genre, oldTitle, newTitle):
     else:
         print(f"Error: Genre '{genre}' does not exist.")
 
-def delete_movies(genre, title):
+def delete_movies():
+    genre = input("Enter genre to delete from: ")
+    
     if genre in movie_genres:
+        title = input("Enter movie title to delete: ")
+        
         if title in movie_genres[genre]:
             movie_genres[genre].remove(title)
             print(f"Successfully deleted '{title}'.")
@@ -35,15 +45,8 @@ def delete_movies(genre, title):
         print(f"Error: Genre '{genre}' does not exist.")
 
 # pang test lang to sa mga functions
-genre = input("Enter genre to update: ")
-old_title = input("Enter old title: ")
-new_title = input("Enter new title: ")
-update_movies(genre, old_title, new_title)
-
+update_movies()
 show_Movies()
 
-del_genre = input("Enter genre to delete from: ")
-del_title = input("Enter movie title to delete: ")
-delete_movies(del_genre, del_title)
-
+delete_movies()
 show_Movies()
