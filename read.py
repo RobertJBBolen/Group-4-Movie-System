@@ -48,3 +48,4 @@ def search():
             print(f"\nAn error occurred during search: {e}")
             print("Please try again.")
             input("\nPress Enter to continue...")
+            
