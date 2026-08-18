@@ -1,24 +1,23 @@
-movie_genres = {
-    "Action": ["Spiderman Brand new day"],
-    "Musical": ["Mamma Mia"],
-    "Comedy": ["Mean Girls"],
-    "Sci-Fi": ["Star wars"]
-}
-movie_reviews = {}
+from movies import movies
 
 def add_review():
     title = input("Enter movie title to review: ")
+    
+    movie_exists = False
+    target_movie = None
 
-    if title:
-        movie_exists = False
-        for movies in movie_genres.values():
-            if title in movies:
-                movie_exists = True
-                break
+    for m in movies:
+        if m["title"] == title:
+            movie_exists = True
+            target_movie = m
+            break
 
     if not movie_exists:
         print(f"Error: '{title}' is not in the movie library.")
         return
+        
+    user_name = input("Enter your name: ")
+
     try:
         rating = int(input("Enter rating (1-5 stars): "))
     except ValueError:
@@ -26,25 +25,30 @@ def add_review():
         return
 
     if rating < 1 or rating > 5:
-        print("Error: Rating must be between 1 and 5 stars")
+        print("Error: Rating must be between 1 and 5 stars.")
         return
 
     comment = input("Enter your comment: ")
 
-    if title not in movie_reviews:
-        movie_reviews[title] = []
-
-    movie_reviews[title].append({"rating": rating, "comment": comment})
+    target_movie["reviews"].append(
+        {"user": user_name, "rating": rating, "comment": comment}
+    )
     print(f"Review added for {title}!")
 
 def show_reviews():
-    title = input("Enter movie title to view (or press Enter to view all): ").strip()
+    title = input(
+        "Enter movie title to view (or press Enter to view all): "
+    ).strip()
 
+    print("=" * 50)
     if title:
         movie_exists = False
-        for movies in movie_genres.values():
-            if title in movies:
+        target_movie = None
+
+        for m in movies:
+            if m["title"] == title:
                 movie_exists = True
+                target_movie = m
                 break
 
         if not movie_exists:
@@ -52,16 +56,20 @@ def show_reviews():
             print("=" * 50)
             return
 
-        reviews = movie_reviews.get(title, [])
+        reviews = target_movie["reviews"]
         if reviews:
             print(f"Reviews for '{title}':")
             for r in reviews:
-                print(f"  - Rating: {'★' * r['rating']} ({r['rating']}/5) | {r['comment']}")
+                print(
+                    f"  - [{r['user']}] Rating: {'★' * r['rating']} ({r['rating']}/5) | {r['comment']}"
+                )
         else:
             print(f"No reviews found for '{title}'.")
-
-# pang test lang puu
-add_review()
-add_review()
-
-show_reviews()
+    else:
+        for m in movies:
+            print(f"Movie: {m['title']}")
+            for r in m["reviews"]:
+                print(
+                    f"  - [{r['user']}] Rating: {'★' * r['rating']} ({r['rating']}/5) | {r['comment']}"
+                )
+    print("=" * 50)
