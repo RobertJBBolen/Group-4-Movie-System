@@ -1,6 +1,9 @@
 from movie import movies, getGenre
 from add_movie import addMovie
 from recommend_movie import recommend
+from editmovies import *
+from review import *
+from read import search
 
 width = 60
 
@@ -85,7 +88,7 @@ def menu(user):
         print("="*width)
         print(""+"MAIN MENU".center(width)+"")
         print("="*width)
-        print("\n [1] Recommendation Movies\n [2] Search Movies\n [3] Add Movie\n [4] Update Movie\n [5] Delete Movie\n [6] Profile\n [7] Exit\n  ")
+        print("\n [1] Recommendation Movies\n [2] Search Movies\n [3] Add Movie\n [4] Review Movie\n [5] Update Movie\n [6] Delete Movie\n [7] Profile\n [8] Exit\n  ")
         print("="*width)
 
         try:
@@ -104,15 +107,18 @@ def menu(user):
             print("\nOpening add movie...")
             addMovie()
         elif choice == 4:
+            print("\nOpening add reviews...")
+            addReview()
+        elif choice == 5:
             print("\nOpening update movie...")
             updateMovie()
-        elif choice == 5:
+        elif choice == 6:
             print("\nOpening delete movie...")
             deleteMovie()
-        elif choice == 6:
+        elif choice == 7:
             print("\nOpening profile...")
             profile(user)
-        elif choice == 7:
+        elif choice == 8:
             print("\nThank you for using screenspace")
             return False
         else:
