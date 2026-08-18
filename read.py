@@ -1,14 +1,13 @@
-movie_genres = {
-    "Action": ["Spiderman Brand new day"],
-    "Musical": ["Mamma Mia"],
-    "Comedy": ["Mean Girls"],
-    "Sci-Fi": ["Star wars"]
-}
+from movie import movies
+width = 60
 
 def search():
-    print("\nSEARCH MOVIES\n")
+    print()
+    print("="*width)
+    print("\n"+"SEARCH MOVIES".center(width)+"\n")
+    print("="*width)
 
-    keyword = input("Enter movie title or genre: ").strip().lower()
+    keyword = input("\nEnter movie title or genre: ").strip().lower()
 
     found = False
 
