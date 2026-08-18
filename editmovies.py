@@ -12,63 +12,52 @@ def show_Movies():
 
     genres = {}
 
-    for m in movies:
-        genre = m["genre"]
+    for movie in movies:
+        genre = movie["genre"]
 
         if genre not in genres:
             genres[genre] = []
 
-        genres[genre].append(m)
+        genres[genre].append(movie)
+
+    number = 1
 
     for genre, movie_list in genres.items():
-
         print(f"\nGenre: {genre}")
 
-        for i, movie in enumerate(movie_list, 1):
-            print(f"[{i}] {movie['title']}")
+        for movie in movie_list:
+            print(f"[{number}] {movie['title']}")
+            number += 1
 
     print("=" * 50)
 
 
 def updateMovie():
 
-    show_Movies()
-
-    genre = input("Enter genre to update: ").strip()
-
-    genre_movies = [
-        m for m in movies
-        if m["genre"].lower() == genre.lower()
-    ]
-
-    if not genre_movies:
-        print(f"Error: Genre '{genre}' does not exist.")
+    if not movies:
+        print("No movies available to update.")
         return
 
-    print(f"\nMovies in {genre}:")
-
-    for i, movie in enumerate(genre_movies, 1):
-        print(f"[{i}] {movie['title']}")
+    show_Movies()
 
     while True:
         try:
             choice = int(
-                input("\nEnter movie number to update: ")
+                input("\nEnter the number of the movie to update: ")
             )
 
-            if 1 <= choice <= len(genre_movies):
-                movie_found = genre_movies[choice - 1]
+            if 1 <= choice <= len(movies):
+                movie_found = movies[choice - 1]
                 break
-
-            print(
-                f"Please enter a number from 1 "
-                f"to {len(genre_movies)}."
-            )
+            else:
+                print(
+                    f"Please enter a number from 1 to {len(movies)}."
+                )
 
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("Invalid input. Please enter numbers only.")
 
-    oldTitle = movie_found["title"]
+    print(f"\nSelected movie: {movie_found['title']}")
 
     newTitle = input("Enter new title: ").strip()
 
@@ -76,106 +65,93 @@ def updateMovie():
         print("Movie title cannot be empty.")
         return
 
-    new_genre = input(
-        "Enter new genre: "
-    ).strip()
+    newGenre = input("Enter new genre: ").strip()
 
-    if new_genre == "":
+    if newGenre == "":
         print("Movie genre cannot be empty.")
         return
 
     while True:
         try:
-            new_year = int(
+            newYear = int(
                 input("Enter new release year: ")
             )
 
-            if 1888 <= new_year <= 2100:
+            if 1888 <= newYear <= 2100:
                 break
 
             print("Please enter a valid year.")
 
         except ValueError:
-            print(
-                "Invalid year. Please enter numbers only."
-            )
+            print("Invalid input. Please enter numbers only.")
 
-    new_desc = input(
+    newDescription = input(
         "Enter new description: "
     ).strip()
 
-    if new_desc == "":
+    if newDescription == "":
         print("Movie description cannot be empty.")
         return
 
+    oldTitle = movie_found["title"]
+
     movie_found["title"] = newTitle
-    movie_found["genre"] = new_genre
-    movie_found["year"] = new_year
-    movie_found["description"] = new_desc
+    movie_found["genre"] = newGenre
+    movie_found["year"] = newYear
+    movie_found["description"] = newDescription
 
     print(
         f"\nSuccessfully updated "
         f"'{oldTitle}' to '{newTitle}'!"
     )
 
-    print("Existing rating and reviews were preserved.")
-
 
 def deleteMovie():
 
-    show_Movies()
-
-    genre = input(
-        "Enter genre to delete from: "
-    ).strip()
-
-    genre_movies = [
-        m for m in movies
-        if m["genre"].lower() == genre.lower()
-    ]
-
-    if not genre_movies:
-        print(
-            f"Error: Genre '{genre}' does not exist."
-        )
+    if not movies:
+        print("No movies available to delete.")
         return
 
-    print(f"\nMovies in {genre}:")
-
-    for i, movie in enumerate(genre_movies, 1):
-        print(f"[{i}] {movie['title']}")
+    show_Movies()
 
     while True:
         try:
             choice = int(
-                input("\nEnter movie number to delete: ")
+                input("\nEnter the number of the movie to delete: ")
             )
 
-            if 1 <= choice <= len(genre_movies):
-                movie_to_delete = genre_movies[
-                    choice - 1
-                ]
+            if 1 <= choice <= len(movies):
+                movie_to_delete = movies[choice - 1]
                 break
-
-            print(
-                f"Please enter a number from 1 "
-                f"to {len(genre_movies)}."
-            )
+            else:
+                print(
+                    f"Please enter a number from 1 to {len(movies)}."
+                )
 
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("Invalid input. Please enter numbers only.")
 
-    title = movie_to_delete["title"]
+    print(
+        f"\nSelected movie: {movie_to_delete['title']}"
+    )
 
-    confirm = input(
-        f"Are you sure you want to delete "
-        f"'{title}'? (yes/no): "
-    ).strip().lower()
+    while True:
+        confirm = input(
+            "Are you sure you want to delete this movie? (yes/no): "
+        ).strip().lower()
 
-    if confirm in ["yes", "y"]:
-        movies.remove(movie_to_delete)
-        print(
-            f"Successfully deleted '{title}'."
-        )
-    else:
-        print("Deletion cancelled.")
+        if confirm in ["yes", "y"]:
+            movies.remove(movie_to_delete)
+
+            print(
+                f"\nSuccessfully deleted "
+                f"'{movie_to_delete['title']}'."
+            )
+            break
+
+        elif confirm in ["no", "n"]:
+            print("\nDeletion cancelled.")
+            break
+
+        else:
+            print("Please enter yes or no.")
