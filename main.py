@@ -10,68 +10,92 @@
 
 # DELETE / (Delete movies)
 
-movie_genres = {
-    "Action": ["Spiderman Brand new day"],
-    "Musical": ["Mamma Mia"],
-    "Comedy": ["Mean Girls"],
-    "Sci-Fi": ["Star wars"]
-}
+from movie import movies
 
 def search():
-    print("\nSEARCH MOVIES\n")
+    while True:
+        try:
+            print("\nSEARCH MOVIES\n")
 
-    keyword = input("Enter movie title or genre: ").strip().lower()
-    found = False
+            keyword = input("Enter movie title or genre: ").strip().lower()
+            found = False
 
-    for genre, titles in movie_genres.items():
-        for title in titles:
-            if keyword in title.lower() or keyword in genre.lower():
-                print(f"\nTitle: {title}")
-                print(f"Genre: {genre}")
-                found = True
+            for movie in movies:
+                try:
+                    if keyword in movie["title"].lower() or keyword in movie["genre"].lower():
+                        print(f"\nTitle: {movie['title']}")
+                        print(f"Genre: {movie['genre']}")
+                        print(f"Year: {movie['year']}")
+                        print(f"Rating: {movie['rating']}/10")
+                        print(f"Description: {movie['description']}")
+                        if "reviews" in movie and movie["reviews"]:
+                            print("Reviews:")
+                            for review in movie["reviews"]:
+                                print(f"  - {review['user']} ({review['rating']}/10): {review['comment']}")
+                        else:
+                            print("Reviews: No reviews yet.")
+                        print("-" * 60)
+                        found = True
+                except KeyError as e:
+                    print(f"Warning: Missing field {e} in movie data")
+                    continue
 
-    if not found:
-        print("\nNo movies found.")
-
-    input("\nPress Enter to return to main menu...")
+            if not found:
+                print("\nNo movies found.")
+                search_again = input("Do you want to search again? (yes/no): ").strip().lower()
+                if search_again not in ['yes', 'y']:
+                    return  # Exit the function and return to main menu
+            else:
+                search_again = input("\nDo you want to search again? (yes/no): ").strip().lower()
+                if search_again not in ['yes', 'y']:
+                    return  # Exit the function and return to main menu
+        except Exception as e:
+            print(f"\nAn error occurred during search: {e}")
+            input("\nPress Enter to try again...")
+            continue
 
 def view_and_review():
-    print("\n--- VIEW & REVIEW MOVIES ---")
-    
-    
-    count = 1
-    movie_list = []
-    
-    for genre in movie_genres:
-        for movie in movie_genres[genre]:
-            print(f"{count}. {movie}")
+    try:
+        print("\n--- VIEW & REVIEW MOVIES ---")
+        
+        count = 1
+        movie_list = []
+        
+        for movie in movies:
+            print(f"{count}. {movie['title']} ({movie['genre']})")
             movie_list.append(movie)
             count += 1
-            
-    
-    choice = int(input("\nEnter movie number: ")) - 1
-    
-    if choice >= 0 and choice < len(movie_list):
-        selected_movie = movie_list[choice]
-        print(f"\n--- Details for: {selected_movie} ---")
+                
         
-        # Show reviews if any exist
-        if selected_movie in reviews:
-            print("Reviews:", reviews[selected_movie])
+        try:
+            choice = int(input("\nEnter movie number: ")) - 1
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            input("\nPress Enter to return...")
+            return
+        
+        if choice >= 0 and choice < len(movie_list):
+            selected_movie = movie_list[choice]
+            print(f"\n--- Details for: {selected_movie['title']} ---")
+            print(f"Genre: {selected_movie['genre']}")
+            print(f"Year: {selected_movie['year']}")
+            print(f"Rating: {selected_movie['rating']}")
+            print(f"Description: {selected_movie['description']}")
+            
+            # Show reviews if any exist
+            if "reviews" in selected_movie and selected_movie["reviews"]:
+                print("\nReviews:")
+                for review in selected_movie["reviews"]:
+                    print(f"  - {review['user']} ({review['rating']}/10): {review['comment']}")
+            else:
+                print("\nNo reviews yet.")
         else:
-            print("No reviews yet.")
+            print("Invalid number choice.")
             
-        # Add a review option
-        new_review = input("Write a review (press Enter to skip): ")
-        if new_review != "":
-            if selected_movie not in reviews:
-                reviews[selected_movie] = []
-            reviews[selected_movie].append(new_review)
-            print("Review saved!")
-    else:
-        print("Invalid number choice.")
-        
-    input("\nPress Enter to return...")
+        input("\nPress Enter to return...")
+    except Exception as e:
+        print(f"\nAn error occurred: {e}")
+        input("\nPress Enter to return...")
 
 # Call main function
 if __name__ == "__main__":
