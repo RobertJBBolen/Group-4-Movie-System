@@ -1,29 +1,20 @@
-movie_genres = {"Action": ["Spiderman Brand new day"],
-            "Musical": ["Mamma Mia"],
-            "Comedy": ["Mean Girls"],
-            "Sci-Fi": ["Star wars"]
-}
-
-def show_Movies():
-    print("=" * 50)
-    for genre, movies in movie_genres.items():
-        print(f"Genre: {genre} Movie: {movies}")
-    print("=" * 50)
-
-show_Movies()
+from movies import movies
 
 def update_movies():
     genre = input("Enter genre to update: ")
-    
-    if genre in movie_genres:
+
+    if genre in [m["genre"] for m in movies]:
         oldTitle = input("Enter old title: ")
-        
-        if oldTitle in movie_genres[genre]:
+
+        movie_found = None
+        for m in movies:
+            if m["genre"] == genre and m["title"] == oldTitle:
+                movie_found = m
+                break
+
+        if movie_found:
             newTitle = input("Enter new title: ")
-            
-            for i, movies in enumerate(movie_genres[genre]):
-                if movies == oldTitle:
-                    movie_genres[genre][i] = newTitle
+            movie_found["title"] = newTitle
             print(f"Successfully updated '{oldTitle}' to '{newTitle}'.")
         else:
             print(f"Error: Could not find '{oldTitle}' in '{genre}'.")
@@ -32,21 +23,20 @@ def update_movies():
 
 def delete_movies():
     genre = input("Enter genre to delete from: ")
-    
-    if genre in movie_genres:
+
+    if genre in [m["genre"] for m in movies]:
         title = input("Enter movie title to delete: ")
-        
-        if title in movie_genres[genre]:
-            movie_genres[genre].remove(title)
+
+        movie_found = None
+        for m in movies:
+            if m["genre"] == genre and m["title"] == title:
+                movie_found = m
+                break
+
+        if movie_found:
+            movies.remove(movie_found)
             print(f"Successfully deleted '{title}'.")
         else:
             print(f"Error: Could not find '{title}' in '{genre}'.")
     else:
         print(f"Error: Genre '{genre}' does not exist.")
-
-# pang test lang to sa mga functions
-update_movies()
-show_Movies()
-
-delete_movies()
-show_Movies()
