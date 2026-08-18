@@ -41,7 +41,7 @@ def register():
         try:
             age = int(input("\nEnter your age: "))
 
-            if 1 <= age <= 120:
+            if 1 <= age <= 50:
                 break
             else:
                 print("\nPlease enter an age between 1 and 120.")
