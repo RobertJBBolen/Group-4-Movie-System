@@ -149,3 +149,12 @@ movies = [
         ]
     }
 ]
+
+def getGenre():
+    genres = []
+
+    for movie in movies:
+        if movie["genre"] not in genres:
+            genres.append(movie["genre"])
+    
+    return genres

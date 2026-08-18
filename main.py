@@ -1,4 +1,5 @@
-genres = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Fantasy", "Romance", "Thriller"]
+from movie import movies, getGenre
+
 width = 60
 
 def banner():
@@ -25,8 +26,28 @@ def register():
     age = input("Enter your age: ")
 
     print()
-    print(genres)
-    favGenre = input("\nEnter your Favorite Genre: ")
+    print("\nGenres:")
+
+    genres = getGenre()
+
+    for i, genre in enumerate(genres, 1):
+        print(f"[{i}] {genre}")
+
+    while True:
+        try:
+            choices = input("\nEnter your Favorite Genres (example: 1 3 5): ").split()
+
+            choices = [int(choice) for choice in choices]
+
+            if all(1 <= choice <= len(genres) for choice in choices):
+                break
+            else:
+                print(f"Please enter numbers from 1 to {len(genres)}.")
+
+        except ValueError:
+            print("Invalid input. Please enter numbers only.")
+
+    favGenre = [genres[choice - 1] for choice in choices]
 
     print("\nRegistered Complete!\n")
 
@@ -49,7 +70,7 @@ def menu(user):
             
         if choice == 1:
             print("\nOpening suggested movie...")
-            suggested()
+            suggestion()
         elif choice == 2:
             print("\nOpening search movie...")
             search()
@@ -70,6 +91,7 @@ def menu(user):
             return False
         else:
             print("\nInvalid choice\n")
+
 
 def profile(user):
     print("="*width)
